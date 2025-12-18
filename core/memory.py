@@ -4,7 +4,7 @@ import os
 class Memory:
     def __init__(self):
         self.history = []
-        # If you have a save file, this might be loading the bad data
+        
         self.file_path = "memory.json" 
         self.load()
 
@@ -15,15 +15,15 @@ class Memory:
         """
         clean_history = []
         for msg in self.history:
-            # Check 1: Does it have 'parts'?
-            # Check 2: Is the text inside 'parts' not empty?
+            
+            
             if "parts" in msg and msg["parts"] and msg["parts"][0].strip():
                 clean_history.append(msg)
         
         return clean_history
 
     def update(self, user_text, ai_text):
-        # Only save valid text
+        
         if not user_text.strip() or not ai_text.strip():
             return
 

@@ -54,7 +54,7 @@ class Recorder:
                         data = rec.record(numframes=1024)
                         self.frames.append(data.copy())
 
-                        # Silence Detection
+                        
                         volume = np.max(np.abs(data))
                         if volume > self.silence_threshold:
                             last_sound_time = time.time()

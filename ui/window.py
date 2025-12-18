@@ -1,4 +1,3 @@
-
 import tkinter as tk
 import ctypes
 from ctypes import windll
@@ -9,12 +8,12 @@ class AppWindow(tk.Tk):
         self.title("KnightFox - Stealth Mode")
         self.geometry("700x550")
         
-        # --- TRANSPARENCY ---
-        # We keep this at 0.8 as per your KnightFox setup.
+        
+        
         self.attributes('-alpha', 0.8) 
 
-        # --- PRIVACY SHIELD (The feature you requested) ---
-        # This tells Windows to hide this specific window from screen capture/sharing.
+        
+        
         self.enable_privacy_shield()
 
         self.on_toggle = on_toggle
@@ -26,7 +25,7 @@ class AppWindow(tk.Tk):
         self.status = tk.Label(self, text="Ready", anchor="w")
         self.status.pack(fill="x", padx=10)
 
-        # --- AUDIO SOURCE TOGGLE ---
+        
         self.audio_mode = tk.StringVar(value="mic")
         self.toggle_frame = tk.Frame(self)
         self.toggle_frame.pack(pady=5)
@@ -48,20 +47,19 @@ class AppWindow(tk.Tk):
         from screen capture (OBS, Discord, Teams, etc.).
         """
         try:
-            # Force window to render so we can get the correct Handle (HWND)
+            
             self.update_idletasks()
             
-            # Get the Window Handle
+            
             hwnd = windll.user32.GetParent(self.winfo_id())
             
-            # Constants for SetWindowDisplayAffinity
-            # WDA_NONE = 0x00000000
-            # WDA_MONITOR = 0x00000001 (Black box in capture)
-            # WDA_EXCLUDEFROMCAPTURE = 0x00000011 (Invisible in capture - Windows 10 Ver 2004+)
             
-            WDA_EXCLUDEFROMCAPTURE = 0x00000011
             
-            # Apply the setting
+            
+            
+WDA_EXCLUDEFROMCAPTURE = 0x00000011
+            
+            
             windll.user32.SetWindowDisplayAffinity(hwnd, WDA_EXCLUDEFROMCAPTURE)
             print("Privacy Shield: ENABLED (Window is hidden from screen recorders)")
             

@@ -1,9 +1,8 @@
-
 import google.generativeai as genai
 
 class GeminiAI:
     def __init__(self):
-        # We do NOT set the key here anymore.
+        
         self.model = None
 
     def configure(self, api_key):
@@ -13,7 +12,7 @@ class GeminiAI:
         """
         try:
             genai.configure(api_key=api_key)
-            # Initialize the model only after we have the key
+            
             self.model = genai.GenerativeModel('gemini-2.0-flash-lite-001')
             return True
         except Exception as e:
@@ -29,10 +28,10 @@ class GeminiAI:
             return
 
         try:
-            # Create a temporary chat session with history
+            
             chat = self.model.start_chat(history=history)
             
-            # Request streaming response
+            
             response = chat.send_message(text, stream=True)
             
             for chunk in response:
