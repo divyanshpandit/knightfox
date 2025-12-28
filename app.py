@@ -104,11 +104,14 @@ from core.stt import SpeechToText
 from core.gemini import GeminiAI
 from core.memory import Memory
 from ui.window import AppWindow
+import google.generativeai as genai
 
 recorder = Recorder()
 stt = SpeechToText()
 ai = GeminiAI()
 memory = Memory()
+def init_gemini(api_key):
+    genai.configure(api_key=api_key)
 
 def get_api_key():
     root = tk.Tk()
@@ -124,7 +127,7 @@ def get_api_key():
     root.destroy()
     
     if key:
-        # The Critical Fix: Remove spaces/quotes
+        
         print(key)
         return key.strip().replace('"', '').replace("'", "")
     return None
@@ -177,13 +180,15 @@ def handle_toggle(is_recording: bool, mode: str = "mic"):
 
 if __name__ == "__main__":
     api_key = get_api_key()
+    init_gemini(api_key)   
+    ai.init_model()
 
     if not api_key:
         print("No API Key provided. Exiting.")
         sys.exit()
     else:
-        if ai.configure(api_key):
-            window = AppWindow(handle_toggle)
-            window.mainloop()
-        else:
-            print("Failed to configure Gemini. Check your key.")        
+        
+        window = AppWindow(handle_toggle)
+        window.mainloop()
+        '''else:
+            print("Failed to configure Gemini. Check your key.")   '''     

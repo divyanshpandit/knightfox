@@ -169,7 +169,7 @@ from ctypes import windll, c_long, sizeof
 import keyboard
 
 # --- THEME PALETTE ---
-COLOR_BG = "#121212"        # Deepest Black
+COLOR_BG = "#121212"        # Main Background
 COLOR_HEADER = "#1f1f1f"    # Header Background
 COLOR_CHAT_BG = "#1e1e1e"   # Chat Background
 COLOR_TEXT_MAIN = "#e0e0e0" # Bright Text
